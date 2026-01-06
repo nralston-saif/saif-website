@@ -31,8 +31,9 @@ async function getLatestPost(): Promise<BlogPostWithAuthor | null> {
 }
 
 async function getStats() {
+  // Get total portfolio count from CRM investments (includes stealth companies)
   const { count: companyCount } = await supabase
-    .from('website_portfolio_companies')
+    .from('saifcrm_investments')
     .select('*', { count: 'exact', head: true })
 
   const { count: themeCount } = await supabase
