@@ -70,7 +70,7 @@ export default async function Home() {
                 href="/apply"
                 className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
               >
-                Apply for Funding
+                Request Funding
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <Link
@@ -295,7 +295,7 @@ export default async function Home() {
             href="/apply"
             className="mt-8 inline-flex h-12 items-center justify-center rounded-md bg-background text-foreground px-8 text-sm font-medium shadow hover:bg-background/90"
           >
-            Apply for Funding
+            Request Funding
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>
