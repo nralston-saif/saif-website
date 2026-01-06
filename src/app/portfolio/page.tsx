@@ -1,5 +1,4 @@
 import { supabase } from '@/lib/supabase'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ExternalLink } from 'lucide-react'
 import type { PortfolioCompany } from '@/types/database'
 
@@ -35,40 +34,47 @@ export default async function PortfolioPage() {
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {companies.map((company) => (
-            <Card key={company.id} className="group hover:shadow-md transition-shadow">
-              {company.logo_url && (
-                <div className="p-6 pb-0">
+            <a
+              key={company.id}
+              href={company.website_url || '#'}
+              target={company.website_url ? '_blank' : undefined}
+              rel={company.website_url ? 'noopener noreferrer' : undefined}
+              className={`group block rounded-lg border bg-card p-6 transition-all hover:shadow-lg hover:border-primary/20 ${
+                company.website_url ? 'cursor-pointer' : 'cursor-default'
+              }`}
+            >
+              {/* Logo Section */}
+              <div className="flex items-center justify-center h-24 mb-6">
+                {company.logo_url ? (
                   <img
                     src={company.logo_url}
                     alt={company.name}
-                    className="h-16 w-auto object-contain"
+                    className="max-h-24 max-w-full object-contain"
                   />
-                </div>
-              )}
-              <CardHeader className={company.logo_url ? 'pt-4' : ''}>
-                <CardTitle className="flex items-center justify-between">
-                  <span>{company.name}</span>
-                  {company.website_url && (
-                    <a
-                      href={company.website_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <ExternalLink className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-                    </a>
-                  )}
-                </CardTitle>
-                {company.tagline && (
-                  <CardDescription>{company.tagline}</CardDescription>
+                ) : (
+                  <div className="h-16 w-16 rounded-lg bg-muted flex items-center justify-center">
+                    <span className="text-2xl font-bold text-muted-foreground">
+                      {company.name.charAt(0)}
+                    </span>
+                  </div>
                 )}
-              </CardHeader>
-              {company.description && (
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{company.description}</p>
-                </CardContent>
-              )}
-            </Card>
+              </div>
+
+              {/* Company Info */}
+              <div className="text-center">
+                <h3 className="font-semibold text-lg flex items-center justify-center gap-2">
+                  {company.name}
+                  {company.website_url && (
+                    <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                  )}
+                </h3>
+                {company.tagline && (
+                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                    {company.tagline}
+                  </p>
+                )}
+              </div>
+            </a>
           ))}
         </div>
       </div>

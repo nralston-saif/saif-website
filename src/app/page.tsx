@@ -191,35 +191,39 @@ export default async function Home() {
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {companies.map((company) => (
-              <Card key={company.id} className="hover:shadow-md transition-shadow">
-                {company.logo_url && (
-                  <div className="p-6 pb-0">
+              <a
+                key={company.id}
+                href={company.website_url || '#'}
+                target={company.website_url ? '_blank' : undefined}
+                rel={company.website_url ? 'noopener noreferrer' : undefined}
+                className={`group block rounded-lg border bg-card p-6 transition-all hover:shadow-lg hover:border-primary/20 ${
+                  company.website_url ? 'cursor-pointer' : 'cursor-default'
+                }`}
+              >
+                <div className="flex items-center justify-center h-20 mb-4">
+                  {company.logo_url ? (
                     <img
                       src={company.logo_url}
                       alt={company.name}
-                      className="h-12 w-auto object-contain"
+                      className="max-h-20 max-w-full object-contain"
                     />
-                  </div>
-                )}
-                <CardHeader className={company.logo_url ? 'pt-4' : ''}>
-                  <CardTitle className="text-lg">{company.name}</CardTitle>
-                  {company.tagline && (
-                    <CardDescription>{company.tagline}</CardDescription>
+                  ) : (
+                    <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center">
+                      <span className="text-xl font-bold text-muted-foreground">
+                        {company.name.charAt(0)}
+                      </span>
+                    </div>
                   )}
-                </CardHeader>
-                {company.website_url && (
-                  <CardContent>
-                    <a
-                      href={company.website_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-primary hover:underline"
-                    >
-                      Visit website →
-                    </a>
-                  </CardContent>
-                )}
-              </Card>
+                </div>
+                <div className="text-center">
+                  <h3 className="font-semibold">{company.name}</h3>
+                  {company.tagline && (
+                    <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                      {company.tagline}
+                    </p>
+                  )}
+                </div>
+              </a>
             ))}
           </div>
 
