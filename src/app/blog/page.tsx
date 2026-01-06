@@ -3,16 +3,19 @@ import { supabase } from '@/lib/supabase'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ExternalLink } from 'lucide-react'
+import type { BlogPost, TeamMember } from '@/types/database'
 
 export const revalidate = 600 // Revalidate every 10 minutes
 
-async function getBlogPosts() {
+type BlogPostWithAuthor = BlogPost & { author: TeamMember | null }
+
+async function getBlogPosts(): Promise<BlogPostWithAuthor[]> {
   const { data } = await supabase
     .from('website_blog_posts')
     .select('*, author:website_team_members(*)')
     .eq('published', true)
     .order('published_at', { ascending: false })
-  return data || []
+  return (data as BlogPostWithAuthor[]) || []
 }
 
 export const metadata = {

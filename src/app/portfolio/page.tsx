@@ -1,15 +1,16 @@
 import { supabase } from '@/lib/supabase'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ExternalLink } from 'lucide-react'
+import type { PortfolioCompany } from '@/types/database'
 
 export const revalidate = 3600
 
-async function getCompanies() {
+async function getCompanies(): Promise<PortfolioCompany[]> {
   const { data } = await supabase
     .from('website_portfolio_companies')
     .select('*')
     .order('sort_order')
-  return data || []
+  return (data as PortfolioCompany[]) || []
 }
 
 export const metadata = {

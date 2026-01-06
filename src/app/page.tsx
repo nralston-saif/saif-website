@@ -3,20 +3,23 @@ import { supabase } from '@/lib/supabase'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Building2, Users, Lightbulb } from 'lucide-react'
+import type { BlogPost, TeamMember, PortfolioCompany } from '@/types/database'
 
 export const revalidate = 3600 // Revalidate every hour
 
-async function getFeaturedCompanies() {
+type BlogPostWithAuthor = BlogPost & { author: TeamMember | null }
+
+async function getFeaturedCompanies(): Promise<PortfolioCompany[]> {
   const { data } = await supabase
     .from('website_portfolio_companies')
     .select('*')
     .eq('featured', true)
     .order('sort_order')
     .limit(6)
-  return data || []
+  return (data as PortfolioCompany[]) || []
 }
 
-async function getLatestPost() {
+async function getLatestPost(): Promise<BlogPostWithAuthor | null> {
   const { data } = await supabase
     .from('website_blog_posts')
     .select('*, author:website_team_members(*)')
@@ -24,7 +27,7 @@ async function getLatestPost() {
     .order('published_at', { ascending: false })
     .limit(1)
     .single()
-  return data
+  return data as BlogPostWithAuthor | null
 }
 
 async function getStats() {

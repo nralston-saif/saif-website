@@ -1,14 +1,15 @@
 import { supabase } from '@/lib/supabase'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import type { InvestmentTheme } from '@/types/database'
 
 export const revalidate = 3600
 
-async function getThemes() {
+async function getThemes(): Promise<InvestmentTheme[]> {
   const { data } = await supabase
     .from('website_investment_themes')
     .select('*')
     .order('sort_order')
-  return data || []
+  return (data as InvestmentTheme[]) || []
 }
 
 export const metadata = {

@@ -1,15 +1,16 @@
 import { supabase } from '@/lib/supabase'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Linkedin, Twitter } from 'lucide-react'
+import type { TeamMember } from '@/types/database'
 
 export const revalidate = 3600
 
-async function getTeamMembers() {
+async function getTeamMembers(): Promise<TeamMember[]> {
   const { data } = await supabase
     .from('website_team_members')
     .select('*')
     .order('sort_order')
-  return data || []
+  return (data as TeamMember[]) || []
 }
 
 export const metadata = {
