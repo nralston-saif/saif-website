@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Script from 'next/script'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CheckCircle } from 'lucide-react'
 
@@ -97,9 +96,17 @@ export default function ApplyPage() {
 
           {/* JotForm Embed */}
           <div className="w-full">
-            <Script
-              src="https://form.jotform.com/jsform/250855326422152"
-              strategy="lazyOnload"
+            <iframe
+              id="JotFormIFrame-250855326422152"
+              title="SAIF Funding Request Form"
+              src="https://form.jotform.com/250855326422152"
+              style={{
+                minWidth: '100%',
+                maxWidth: '100%',
+                height: '539px',
+                border: 'none',
+              }}
+              scrolling="no"
             />
           </div>
         </div>
