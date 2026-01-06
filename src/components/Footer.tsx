@@ -6,8 +6,8 @@ export function Footer() {
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <Link href="/" className="text-2xl font-bold tracking-tight">
-              SAIF
+            <Link href="/" className="text-3xl tracking-tight font-[family-name:var(--font-montserrat)]">
+              S<span className="font-bold">AI</span>F
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-md">
               The Safe Artificial Intelligence Fund is an early-stage venture fund
