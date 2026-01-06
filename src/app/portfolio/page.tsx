@@ -36,7 +36,16 @@ export default async function PortfolioPage() {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {companies.map((company) => (
             <Card key={company.id} className="group hover:shadow-md transition-shadow">
-              <CardHeader>
+              {company.logo_url && (
+                <div className="p-6 pb-0">
+                  <img
+                    src={company.logo_url}
+                    alt={company.name}
+                    className="h-16 w-auto object-contain"
+                  />
+                </div>
+              )}
+              <CardHeader className={company.logo_url ? 'pt-4' : ''}>
                 <CardTitle className="flex items-center justify-between">
                   <span>{company.name}</span>
                   {company.website_url && (

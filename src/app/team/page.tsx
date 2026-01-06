@@ -36,7 +36,15 @@ export default async function TeamPage() {
           {members.map((member) => (
             <Card key={member.id}>
               <CardHeader>
-                <div className="mb-4 h-32 w-32 rounded-full bg-muted mx-auto" />
+                {member.photo_url ? (
+                  <img
+                    src={member.photo_url}
+                    alt={member.name}
+                    className="mb-4 h-32 w-32 rounded-full object-cover mx-auto"
+                  />
+                ) : (
+                  <div className="mb-4 h-32 w-32 rounded-full bg-muted mx-auto" />
+                )}
                 <CardTitle className="text-center">{member.name}</CardTitle>
                 <CardDescription className="text-center">{member.role}</CardDescription>
               </CardHeader>

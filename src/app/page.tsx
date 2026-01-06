@@ -191,7 +191,16 @@ export default async function Home() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {companies.map((company) => (
               <Card key={company.id} className="hover:shadow-md transition-shadow">
-                <CardHeader>
+                {company.logo_url && (
+                  <div className="p-6 pb-0">
+                    <img
+                      src={company.logo_url}
+                      alt={company.name}
+                      className="h-12 w-auto object-contain"
+                    />
+                  </div>
+                )}
+                <CardHeader className={company.logo_url ? 'pt-4' : ''}>
                   <CardTitle className="text-lg">{company.name}</CardTitle>
                   {company.tagline && (
                     <CardDescription>{company.tagline}</CardDescription>
