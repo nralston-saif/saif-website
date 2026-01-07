@@ -1,0 +1,120 @@
+'use server'
+
+import { createClient } from '@supabase/supabase-js'
+import { z } from 'zod'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+const formSchema = z.object({
+  founderNames: z.string().min(1, 'At least one founder name is required'),
+  founderLinkedins: z.string().min(1, 'At least one LinkedIn URL is required'),
+  companyName: z.string().min(1, 'Company name is required'),
+  companyDescription: z.string().min(10, 'Please provide a description of at least 10 characters'),
+  website: z.string().url().optional().or(z.literal('')),
+  primaryEmail: z.string().email('Please enter a valid email address'),
+  previousFunding: z.string().optional(),
+  founderBios: z.string().min(10, 'Please provide founder bios of at least 10 characters'),
+  deckLink: z.string().url().optional().or(z.literal('')),
+  honeypot: z.string().max(0, 'Bot detected'), // Spam protection
+})
+
+export type FormState = {
+  success: boolean
+  message: string
+  submissionId?: string
+  errors?: Record<string, string[]>
+}
+
+export async function submitFundingRequest(
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  // Check honeypot field (spam protection)
+  const honeypot = formData.get('website_url') as string
+  if (honeypot) {
+    // Bot detected, silently fail
+    return {
+      success: true,
+      message: 'Thank you for your submission!',
+    }
+  }
+
+  const rawData = {
+    founderNames: formData.get('founderNames') as string,
+    founderLinkedins: formData.get('founderLinkedins') as string,
+    companyName: formData.get('companyName') as string,
+    companyDescription: formData.get('companyDescription') as string,
+    website: formData.get('website') as string,
+    primaryEmail: formData.get('primaryEmail') as string,
+    previousFunding: formData.get('previousFunding') as string,
+    founderBios: formData.get('founderBios') as string,
+    deckLink: formData.get('deckLink') as string,
+    honeypot: '',
+  }
+
+  // Validate the data
+  const validationResult = formSchema.safeParse(rawData)
+
+  if (!validationResult.success) {
+    const errors: Record<string, string[]> = {}
+    validationResult.error.issues.forEach((issue) => {
+      const path = issue.path[0] as string
+      if (!errors[path]) {
+        errors[path] = []
+      }
+      errors[path].push(issue.message)
+    })
+
+    return {
+      success: false,
+      message: 'Please fix the errors below.',
+      errors,
+    }
+  }
+
+  const data = validationResult.data
+
+  // Generate a submission ID
+  const submissionId = `SAIF-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+
+  try {
+    const { error } = await supabase
+      .from('saifcrm_applications')
+      .insert({
+        submission_id: submissionId,
+        company_name: data.companyName,
+        founder_names: data.founderNames,
+        founder_linkedins: data.founderLinkedins,
+        founder_bios: data.founderBios,
+        primary_email: data.primaryEmail,
+        company_description: data.companyDescription,
+        website: data.website || null,
+        previous_funding: data.previousFunding || null,
+        deck_link: data.deckLink || null,
+        stage: 'new',
+      })
+
+    if (error) {
+      console.error('Supabase error:', error)
+      return {
+        success: false,
+        message: 'There was an error submitting your application. Please try again.',
+      }
+    }
+
+    return {
+      success: true,
+      message: 'Your application has been submitted successfully!',
+      submissionId,
+    }
+  } catch (error) {
+    console.error('Submission error:', error)
+    return {
+      success: false,
+      message: 'There was an error submitting your application. Please try again.',
+    }
+  }
+}

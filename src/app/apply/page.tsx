@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CheckCircle } from 'lucide-react'
+import { FundingRequestForm } from '@/components/FundingRequestForm'
 
 export const metadata = {
   title: 'Request Funding | SAIF',
@@ -94,20 +95,9 @@ export default function ApplyPage() {
             </p>
           </div>
 
-          {/* JotForm Embed */}
-          <div className="w-full">
-            <iframe
-              id="JotFormIFrame-250855326422152"
-              title="SAIF Funding Request Form"
-              src="https://form.jotform.com/250855326422152"
-              style={{
-                minWidth: '100%',
-                maxWidth: '100%',
-                height: '539px',
-                border: 'none',
-              }}
-              scrolling="no"
-            />
+          {/* Native Funding Request Form */}
+          <div className="rounded-xl border bg-card p-6 sm:p-8 shadow-sm">
+            <FundingRequestForm />
           </div>
         </div>
       </div>
