@@ -68,7 +68,7 @@ export default async function Home() {
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Link
-                href="/apply"
+                href="/request"
                 className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
               >
                 Request Funding
@@ -297,7 +297,7 @@ export default async function Home() {
             that align with AI Safety.
           </p>
           <Link
-            href="/apply"
+            href="/request"
             className="mt-8 inline-flex h-12 items-center justify-center rounded-md bg-background text-foreground px-8 text-sm font-medium shadow hover:bg-background/90"
           >
             Request Funding

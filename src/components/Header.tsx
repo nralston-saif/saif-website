@@ -42,7 +42,7 @@ export function Header() {
         </nav>
 
         <Link
-          href="/apply"
+          href="/request"
           className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
         >
           Request Funding

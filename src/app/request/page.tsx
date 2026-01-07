@@ -8,7 +8,7 @@ export const metadata = {
   description: 'Request investment from the Safe Artificial Intelligence Fund.',
 }
 
-export default function ApplyPage() {
+export default function RequestPage() {
   return (
     <div className="py-24">
       <div className="container">

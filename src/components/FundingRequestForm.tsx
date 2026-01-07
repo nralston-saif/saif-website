@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { submitFundingRequest, type FormState } from '@/app/apply/actions/submit'
+import { submitFundingRequest, type FormState } from '@/app/request/actions/submit'
 import { Plus, Trash2, CheckCircle, Loader2, Send } from 'lucide-react'
 
 type Founder = {
