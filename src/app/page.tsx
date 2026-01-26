@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ArrowRight, DollarSign, Users, Network, Sparkles } from 'lucide-react'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card'
+import { ArrowRight } from 'lucide-react'
 import type { BlogPost, TeamMember, PortfolioCompany } from '@/types/database'
 
 export const revalidate = 3600 // Revalidate every hour
@@ -38,16 +38,12 @@ export default async function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative py-12 lg:py-16 overflow-hidden">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5" />
-
-        <div className="container relative">
+      <section className="py-12 lg:py-16">
+        <div className="container">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary mb-4">
-              <Sparkles className="h-4 w-4" />
+            <p className="text-sm font-medium text-primary mb-4 tracking-wide uppercase">
               Early-Stage Venture Fund
-            </div>
+            </p>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
               Building a Safer Future with AI
             </h1>
@@ -57,14 +53,14 @@ export default async function Home() {
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/request"
-                className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/25 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 transition-all"
+                className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
               >
                 Request Funding
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <Link
                 href="/thesis"
-                className="inline-flex h-11 items-center justify-center rounded-full border-2 border-border bg-background px-6 text-sm font-medium hover:bg-muted transition-all"
+                className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-5 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
               >
                 Our Investment Thesis
               </Link>
@@ -83,48 +79,27 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3 max-w-4xl mx-auto">
-            <Card className="border-0 shadow-sm bg-background hover:shadow-md transition-shadow">
-              <CardHeader className="pb-3">
-                <div className="h-10 w-10 rounded-lg bg-green-500/10 flex items-center justify-center mb-2">
-                  <DollarSign className="h-5 w-5 text-green-600" />
-                </div>
-                <CardTitle className="text-lg">$100K Investment</CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <p className="text-sm text-muted-foreground">
-                  SAFE with $10mm cap to help you build your initial product
-                </p>
-              </CardContent>
-            </Card>
+          <div className="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto">
+            <div className="text-center">
+              <h3 className="text-lg font-semibold mb-2">$100K Investment</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                SAFE with $10mm cap to help you build your initial product
+              </p>
+            </div>
 
-            <Card className="border-0 shadow-sm bg-background hover:shadow-md transition-shadow">
-              <CardHeader className="pb-3">
-                <div className="h-10 w-10 rounded-lg bg-blue-500/10 flex items-center justify-center mb-2">
-                  <Users className="h-5 w-5 text-blue-600" />
-                </div>
-                <CardTitle className="text-lg">Mentorship</CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <p className="text-sm text-muted-foreground">
-                  Weekly office hours to discuss strategy and product
-                </p>
-              </CardContent>
-            </Card>
+            <div className="text-center">
+              <h3 className="text-lg font-semibold mb-2">Mentorship</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Weekly office hours to discuss strategy and product
+              </p>
+            </div>
 
-            <Card className="border-0 shadow-sm bg-background hover:shadow-md transition-shadow">
-              <CardHeader className="pb-3">
-                <div className="h-10 w-10 rounded-lg bg-purple-500/10 flex items-center justify-center mb-2">
-                  <Network className="h-5 w-5 text-purple-600" />
-                </div>
-                <CardTitle className="text-lg">Network Access</CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <p className="text-sm text-muted-foreground">
-                  Intros to AI-focused VCs and strategic partners
-                </p>
-              </CardContent>
-            </Card>
+            <div className="text-center">
+              <h3 className="text-lg font-semibold mb-2">Network Access</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Intros to AI-focused VCs and strategic partners
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -167,8 +142,8 @@ export default async function Home() {
                       className="max-h-16 max-w-full object-contain"
                     />
                   ) : (
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                      <span className="text-lg font-bold text-primary">
+                    <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center">
+                      <span className="text-lg font-semibold text-muted-foreground">
                         {company.name.charAt(0)}
                       </span>
                     </div>
@@ -245,7 +220,7 @@ export default async function Home() {
       )}
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
+      <section className="py-16 bg-primary text-primary-foreground">
         <div className="container text-center">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
             Building something that makes AI safer?
@@ -255,7 +230,7 @@ export default async function Home() {
           </p>
           <Link
             href="/request"
-            className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-background text-foreground px-6 text-sm font-medium shadow-lg hover:bg-background/90 transition-all"
+            className="mt-6 inline-flex h-10 items-center justify-center rounded-md bg-background text-foreground px-5 text-sm font-medium hover:bg-background/90 transition-colors"
           >
             Request Funding
             <ArrowRight className="ml-2 h-4 w-4" />
