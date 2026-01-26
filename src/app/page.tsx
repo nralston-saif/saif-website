@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ArrowRight, Building2, Users, Lightbulb } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import type { BlogPost, TeamMember, PortfolioCompany } from '@/types/database'
 
 export const revalidate = 3600 // Revalidate every hour
@@ -30,30 +30,16 @@ async function getLatestPost(): Promise<BlogPostWithAuthor | null> {
   return data as BlogPostWithAuthor | null
 }
 
-async function getStats() {
-  // Get total portfolio count from CRM investments (includes stealth companies)
-  const { count: companyCount } = await supabase
-    .from('saifcrm_investments')
-    .select('*', { count: 'exact', head: true })
-
-  const { count: themeCount } = await supabase
-    .from('website_investment_themes')
-    .select('*', { count: 'exact', head: true })
-
-  return { companyCount: companyCount || 0, themeCount: themeCount || 0 }
-}
-
 export default async function Home() {
-  const [companies, latestPost, stats] = await Promise.all([
+  const [companies, latestPost] = await Promise.all([
     getFeaturedCompanies(),
     getLatestPost(),
-    getStats(),
   ])
 
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative py-24 lg:py-32">
+      <section className="relative py-16 lg:py-20">
         <div className="container">
           <div className="max-w-3xl">
             <Badge variant="secondary" className="mb-4">
@@ -85,43 +71,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="border-y bg-muted/30 py-12">
-        <div className="container">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-            <div className="flex items-center gap-4">
-              <div className="rounded-lg bg-primary/10 p-3">
-                <Building2 className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-3xl font-bold">{stats.companyCount}</p>
-                <p className="text-sm text-muted-foreground">Portfolio Companies</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="rounded-lg bg-primary/10 p-3">
-                <Lightbulb className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-3xl font-bold">{stats.themeCount}</p>
-                <p className="text-sm text-muted-foreground">Investment Themes</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="rounded-lg bg-primary/10 p-3">
-                <Users className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-3xl font-bold">$100K</p>
-                <p className="text-sm text-muted-foreground">Initial Investment</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* What We Do Section */}
-      <section className="py-24">
+      <section className="py-16">
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight">What We Do</h2>
@@ -171,7 +122,7 @@ export default async function Home() {
       </section>
 
       {/* Featured Portfolio Section */}
-      <section className="border-t bg-muted/30 py-24">
+      <section className="border-t bg-muted/30 py-16">
         <div className="container">
           <div className="flex items-center justify-between">
             <div>
@@ -241,7 +192,7 @@ export default async function Home() {
 
       {/* Latest Blog Post */}
       {latestPost && (
-        <section className="py-24">
+        <section className="py-16">
           <div className="container">
             <h2 className="text-3xl font-bold tracking-tight">Latest from the Blog</h2>
             <Card className="mt-8">
@@ -287,7 +238,7 @@ export default async function Home() {
       )}
 
       {/* CTA Section */}
-      <section className="border-t bg-primary text-primary-foreground py-24">
+      <section className="border-t bg-primary text-primary-foreground py-16">
         <div className="container text-center">
           <h2 className="text-3xl font-bold tracking-tight">
             Building something that makes AI safer?

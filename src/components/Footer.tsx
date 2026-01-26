@@ -30,7 +30,6 @@ export function Footer() {
             <h3 className="font-semibold mb-4">Get in Touch</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/request" className="hover:text-foreground">Request Funding</Link></li>
-              <li><a href="mailto:hello@saif.vc" className="hover:text-foreground">hello@saif.vc</a></li>
             </ul>
           </div>
         </div>
