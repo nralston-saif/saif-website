@@ -8,7 +8,7 @@ async function getCompanies(): Promise<PortfolioCompany[]> {
   const { data } = await supabase
     .from('website_portfolio_companies')
     .select('*')
-    .order('sort_order')
+    .order('name')
   return (data as PortfolioCompany[]) || []
 }
 

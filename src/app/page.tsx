@@ -13,7 +13,7 @@ async function getAllCompanies(): Promise<PortfolioCompany[]> {
   const { data } = await supabase
     .from('website_portfolio_companies')
     .select('*')
-    .order('sort_order')
+    .order('name')
   return (data as PortfolioCompany[]) || []
 }
 
@@ -157,9 +157,23 @@ export default async function Home() {
                   )}
                 </div>
                 <CardTitle className="text-xl">
-                  <Link href={`/blog/${latestPost.slug}`} className="hover:text-primary transition-colors">
-                    {latestPost.title}
-                  </Link>
+                  {latestPost.source_url ? (
+                    <a
+                      href={latestPost.source_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary transition-colors inline-flex items-center gap-2"
+                    >
+                      {latestPost.title}
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <Link href={`/blog/${latestPost.slug}`} className="hover:text-primary transition-colors">
+                      {latestPost.title}
+                    </Link>
+                  )}
                 </CardTitle>
                 {latestPost.excerpt && (
                   <p className="text-sm text-muted-foreground mt-2">
