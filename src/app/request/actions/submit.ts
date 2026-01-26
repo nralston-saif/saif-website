@@ -26,6 +26,15 @@ export type FormState = {
   message: string
   submissionId?: string
   errors?: Record<string, string[]>
+  values?: {
+    companyName?: string
+    companyDescription?: string
+    website?: string
+    primaryEmail?: string
+    previousFunding?: string
+    founderBios?: string
+    deckLink?: string
+  }
 }
 
 export async function submitFundingRequest(
@@ -72,6 +81,15 @@ export async function submitFundingRequest(
       success: false,
       message: 'Please fix the errors below.',
       errors,
+      values: {
+        companyName: rawData.companyName,
+        companyDescription: rawData.companyDescription,
+        website: rawData.website,
+        primaryEmail: rawData.primaryEmail,
+        previousFunding: rawData.previousFunding,
+        founderBios: rawData.founderBios,
+        deckLink: rawData.deckLink,
+      },
     }
   }
 

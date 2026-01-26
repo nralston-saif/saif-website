@@ -31,6 +31,30 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Safe Artificial Intelligence Fund",
+  alternateName: "SAIF",
+  url: "https://saif.vc",
+  description: "An early-stage venture fund dedicated to supporting startups developing tools to enhance AI safety, security, and responsible deployment.",
+  foundingDate: "2024",
+  areaServed: "Worldwide",
+  knowsAbout: ["Artificial Intelligence", "AI Safety", "Machine Learning", "Venture Capital"],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "SAIF - Safe Artificial Intelligence Fund",
+  url: "https://saif.vc",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://saif.vc/portfolio?q={search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,6 +62,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`}>
         <div className="flex min-h-screen flex-col">
           <Header />

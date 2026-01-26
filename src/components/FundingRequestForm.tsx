@@ -174,6 +174,7 @@ export function FundingRequestForm() {
             name="companyName"
             placeholder="Acme AI"
             required
+            defaultValue={state.values?.companyName}
             aria-invalid={!!state.errors?.companyName}
           />
           {state.errors?.companyName && (
@@ -191,6 +192,7 @@ export function FundingRequestForm() {
             type="email"
             placeholder="jane@acme.ai"
             required
+            defaultValue={state.values?.primaryEmail}
             aria-invalid={!!state.errors?.primaryEmail}
           />
           {state.errors?.primaryEmail && (
@@ -211,6 +213,7 @@ export function FundingRequestForm() {
           name="companyDescription"
           placeholder="We're building..."
           required
+          defaultValue={state.values?.companyDescription}
           className="min-h-[120px]"
           aria-invalid={!!state.errors?.companyDescription}
         />
@@ -231,6 +234,7 @@ export function FundingRequestForm() {
           name="founderBios"
           placeholder="Jane has 10 years of experience in..."
           required
+          defaultValue={state.values?.founderBios}
           className="min-h-[120px]"
           aria-invalid={!!state.errors?.founderBios}
         />
@@ -248,6 +252,7 @@ export function FundingRequestForm() {
             name="website"
             type="url"
             placeholder="https://acme.ai"
+            defaultValue={state.values?.website}
             aria-invalid={!!state.errors?.website}
           />
           {state.errors?.website && (
@@ -262,6 +267,7 @@ export function FundingRequestForm() {
             name="deckLink"
             type="url"
             placeholder="https://drive.google.com/..."
+            defaultValue={state.values?.deckLink}
             aria-invalid={!!state.errors?.deckLink}
           />
           {state.errors?.deckLink && (
@@ -279,6 +285,7 @@ export function FundingRequestForm() {
           id="previousFunding"
           name="previousFunding"
           placeholder="We raised a $500k pre-seed from... / We were part of Y Combinator W24..."
+          defaultValue={state.values?.previousFunding}
           className="min-h-[100px]"
         />
       </div>
