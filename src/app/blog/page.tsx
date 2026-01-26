@@ -19,8 +19,8 @@ async function getBlogPosts(): Promise<BlogPostWithAuthor[]> {
 }
 
 export const metadata = {
-  title: 'Blog | SAIF',
-  description: 'Thoughts on AI safety, security, and responsible deployment.',
+  title: 'News/Blog | SAIF',
+  description: 'News, thoughts, and insights on AI safety from our team and the press.',
 }
 
 export default async function BlogPage() {
@@ -30,7 +30,7 @@ export default async function BlogPage() {
     <div className="py-24">
       <div className="container">
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight">Blog</h1>
+          <h1 className="text-4xl font-bold tracking-tight">News/Blog</h1>
           <p className="mt-4 text-lg text-muted-foreground">
             Thoughts, news, and insights on AI safety from our team and the press.
           </p>
