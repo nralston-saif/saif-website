@@ -39,20 +39,20 @@ export default async function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative py-16 lg:py-20">
+      <section className="relative py-10 lg:py-12">
         <div className="container">
           <div className="max-w-3xl">
-            <Badge variant="secondary" className="mb-4">
+            <Badge variant="secondary" className="mb-3">
               Early-Stage Venture Fund
             </Badge>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               Building a Safer Future with AI
             </h1>
-            <p className="mt-6 text-xl text-muted-foreground">
+            <p className="mt-4 text-xl text-muted-foreground">
               The Safe Artificial Intelligence Fund invests in startups developing tools
               to enhance AI safety, security, and responsible deployment.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+            <div className="mt-6 flex flex-col sm:flex-row gap-4">
               <Link
                 href="/request"
                 className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
@@ -72,18 +72,18 @@ export default async function Home() {
       </section>
 
       {/* What We Do Section */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight">What We Do</h2>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="mt-3 text-lg text-muted-foreground">
               SAIF provides initial funding of $100,000 on a SAFE with a $10mm cap,
               along with mentorship and access to our network of AI-focused investors
               and strategic partners.
             </p>
           </div>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-3">
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
             <Card>
               <CardHeader>
                 <CardTitle>Financial Investment</CardTitle>
