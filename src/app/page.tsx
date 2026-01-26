@@ -2,19 +2,18 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowRight } from 'lucide-react'
+import { PortfolioCarousel } from '@/components/PortfolioCarousel'
 import type { BlogPost, TeamMember, PortfolioCompany } from '@/types/database'
 
 export const revalidate = 3600 // Revalidate every hour
 
 type BlogPostWithAuthor = BlogPost & { author: TeamMember | null }
 
-async function getFeaturedCompanies(): Promise<PortfolioCompany[]> {
+async function getAllCompanies(): Promise<PortfolioCompany[]> {
   const { data } = await supabase
     .from('website_portfolio_companies')
     .select('*')
-    .eq('featured', true)
     .order('sort_order')
-    .limit(6)
   return (data as PortfolioCompany[]) || []
 }
 
@@ -31,7 +30,7 @@ async function getLatestPost(): Promise<BlogPostWithAuthor | null> {
 
 export default async function Home() {
   const [companies, latestPost] = await Promise.all([
-    getFeaturedCompanies(),
+    getAllCompanies(),
     getLatestPost(),
   ])
 
@@ -104,7 +103,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Featured Portfolio Section */}
+      {/* Portfolio Section */}
       <section className="py-12">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
@@ -116,60 +115,14 @@ export default async function Home() {
             </div>
             <Link
               href="/portfolio"
-              className="hidden sm:inline-flex items-center text-sm font-medium text-primary hover:underline"
+              className="inline-flex items-center text-sm font-medium text-primary hover:underline"
             >
               View all
               <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {companies.map((company) => (
-              <a
-                key={company.id}
-                href={company.website_url || '#'}
-                target={company.website_url ? '_blank' : undefined}
-                rel={company.website_url ? 'noopener noreferrer' : undefined}
-                className={`group block rounded-xl border bg-card p-5 transition-all hover:shadow-md hover:border-primary/20 ${
-                  company.website_url ? 'cursor-pointer' : 'cursor-default'
-                }`}
-              >
-                <div className="flex items-center justify-center h-16 mb-3">
-                  {company.logo_url ? (
-                    <img
-                      src={company.logo_url}
-                      alt={company.name}
-                      className="max-h-16 max-w-full object-contain"
-                    />
-                  ) : (
-                    <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center">
-                      <span className="text-lg font-semibold text-muted-foreground">
-                        {company.name.charAt(0)}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <div className="text-center">
-                  <h3 className="font-semibold">{company.name}</h3>
-                  {company.tagline && (
-                    <p className="mt-1 text-xs text-muted-foreground line-clamp-2">
-                      {company.tagline}
-                    </p>
-                  )}
-                </div>
-              </a>
-            ))}
-          </div>
-
-          <div className="mt-6 text-center sm:hidden">
-            <Link
-              href="/portfolio"
-              className="inline-flex items-center text-sm font-medium text-primary hover:underline"
-            >
-              View all companies
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </div>
+          <PortfolioCarousel companies={companies} />
         </div>
       </section>
 
