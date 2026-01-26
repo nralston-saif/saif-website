@@ -41,7 +41,7 @@ export default async function Home() {
       {/* Hero Section */}
       <section className="relative py-10 lg:py-12">
         <div className="container">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto text-center">
             <Badge variant="secondary" className="mb-3">
               Early-Stage Venture Fund
             </Badge>
@@ -52,7 +52,7 @@ export default async function Home() {
               The Safe Artificial Intelligence Fund invests in startups developing tools
               to enhance AI safety, security, and responsible deployment.
             </p>
-            <div className="mt-6 flex flex-col sm:flex-row gap-4">
+            <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/request"
                 className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
