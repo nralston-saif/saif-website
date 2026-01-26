@@ -25,10 +25,6 @@ export default async function TeamPage() {
       <div className="container">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight">Our Team</h1>
-          <p className="mt-4 text-lg text-muted-foreground">
-            We&apos;re a team of experienced investors and entrepreneurs committed
-            to building a safer future with AI.
-          </p>
         </div>
 
         <TeamMemberGrid members={members} />
