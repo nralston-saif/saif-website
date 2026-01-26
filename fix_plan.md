@@ -42,21 +42,33 @@ Last updated: 2026-01-26
 
 ## Priority 2: UX & Polish
 
-### 2.1 🔴 Add Loading States/Skeletons
+### 2.1 🟢 Add Loading States/Skeletons
 **Issue:** Pages display nothing during data fetch
-**Fix:** Add Suspense boundaries and skeleton components
+**Fix:** Added loading.tsx files for all data-fetching pages:
+- `/portfolio/loading.tsx` - Card grid skeletons
+- `/team/loading.tsx` - Team member card skeletons
+- `/blog/loading.tsx` - Blog post card skeletons
+- `/thesis/loading.tsx` - Investment theme card skeletons
+All use consistent animate-pulse styling
+**Completed:** 2026-01-26
 
-### 2.2 🔴 Form Reset After Success
+### 2.2 🟢 Form Reset After Success
 **Location:** `/src/components/FundingRequestForm.tsx`
 **Issue:** After successful submission, no way to submit another application without page reload
+**Fix:** Added "Submit Another Application" button to success screen that reloads the page to reset form state
+**Completed:** 2026-01-26
 
 ---
 
 ## Priority 3: SEO & Best Practices
 
-### 3.1 🔴 Add Sitemap and Robots.txt
+### 3.1 🟢 Add Sitemap and Robots.txt
 **Issue:** Missing SEO metadata files for crawlers
-**Fix:** Add `sitemap.ts` and `robots.ts` to the app directory
+**Fix:** Added `sitemap.ts` and `robots.ts` to the app directory:
+- Sitemap includes all public routes with appropriate priorities and change frequencies
+- Robots.txt allows all crawlers except for /api/ routes
+- Both use Next.js MetadataRoute types for type safety
+**Completed:** 2026-01-26
 
 ### 3.2 🔴 Add Structured Data (Schema.org)
 **Issue:** No structured data for search engines

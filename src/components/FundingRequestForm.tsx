@@ -45,6 +45,11 @@ export function FundingRequestForm() {
   const founderNamesValue = founders.map((f) => f.name).filter(Boolean).join('\n')
   const founderLinkedinsValue = founders.map((f) => f.linkedin).filter(Boolean).join('\n')
 
+  const resetForm = () => {
+    setFounders([{ id: '1', name: '', linkedin: '' }])
+    window.location.reload()
+  }
+
   if (state.success && state.submissionId) {
     return (
       <div className="rounded-xl border bg-card p-8 text-center">
@@ -55,9 +60,12 @@ export function FundingRequestForm() {
         <p className="text-muted-foreground mb-4">
           Thank you for your interest in SAIF. We&apos;ll review your application and get back to you soon.
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground mb-6">
           Reference ID: <code className="rounded bg-muted px-2 py-1">{state.submissionId}</code>
         </p>
+        <Button variant="outline" onClick={resetForm}>
+          Submit Another Application
+        </Button>
       </div>
     )
   }
