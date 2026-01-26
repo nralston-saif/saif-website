@@ -41,6 +41,9 @@ Required in `.env.local`:
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
+Optional:
+- `REVALIDATION_SECRET` - Secret token for the `/api/revalidate` endpoint (recommended for production)
+
 ## Deployment
 
 Deploy to Vercel and set the environment variables in the Vercel dashboard.

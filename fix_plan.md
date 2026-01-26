@@ -1,0 +1,83 @@
+# SAIF Website Fix Plan
+
+Last updated: 2026-01-26
+
+## Status Legend
+- 🔴 Not Started
+- 🟡 In Progress
+- 🟢 Complete
+
+---
+
+## Priority 1: Security & Critical Functionality
+
+### 1.1 🟢 Enable Revalidation Secret Token Validation
+**Location:** `/src/app/api/revalidate/route.ts`
+**Issue:** Secret token validation is commented out, allowing any client to trigger cache revalidation
+**Fix:** Enabled secret validation for both GET and POST endpoints. Validation is optional - only enforced when `REVALIDATION_SECRET` env var is set.
+**Completed:** 2026-01-26
+
+### 1.2 🟢 Implement Mobile Navigation Menu
+**Location:** `/src/components/Header.tsx`
+**Issue:** Mobile menu button exists but has no click handler or menu implementation
+**Fix:** Added fully functional mobile menu with:
+- Toggle state management with useState
+- Close menu on route change (useEffect on pathname)
+- Body scroll lock when menu is open
+- Hamburger/X icon toggle animation
+- Accessible aria-label and aria-expanded attributes
+- Full navigation links and CTA button
+**Completed:** 2026-01-26
+
+### 1.3 🟢 Add Error Boundaries and 404 Pages
+**Location:** `/src/app/`
+**Issue:** No custom error handling or 404 pages
+**Fix:** Created `not-found.tsx` and `error.tsx` in the app directory with:
+- Custom 404 page with friendly message and "Back to Home" button
+- Error boundary with reset functionality and error logging
+- Consistent styling matching the rest of the site
+**Completed:** 2026-01-26
+
+---
+
+## Priority 2: UX & Polish
+
+### 2.1 🔴 Add Loading States/Skeletons
+**Issue:** Pages display nothing during data fetch
+**Fix:** Add Suspense boundaries and skeleton components
+
+### 2.2 🔴 Form Reset After Success
+**Location:** `/src/components/FundingRequestForm.tsx`
+**Issue:** After successful submission, no way to submit another application without page reload
+
+---
+
+## Priority 3: SEO & Best Practices
+
+### 3.1 🔴 Add Sitemap and Robots.txt
+**Issue:** Missing SEO metadata files for crawlers
+**Fix:** Add `sitemap.ts` and `robots.ts` to the app directory
+
+### 3.2 🔴 Add Structured Data (Schema.org)
+**Issue:** No structured data for search engines
+**Fix:** Add JSON-LD structured data to key pages
+
+---
+
+## Priority 4: Testing
+
+### 4.1 🔴 Set Up Testing Framework
+**Issue:** No test files exist
+**Fix:** Set up Jest + React Testing Library, add initial tests
+
+---
+
+## Notes & Learnings
+
+_Space for documenting discoveries during implementation_
+
+---
+
+## Completed Items
+
+_Items will be moved here when completed_
