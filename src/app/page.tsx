@@ -41,15 +41,15 @@ export default async function Home() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-sm font-medium text-primary mb-4 tracking-wide uppercase">
-              Early-Stage Venture Fund
+              Safe Artificial Intelligence Fund
             </p>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text whitespace-nowrap">
               Building a Safer Future with AI
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
               SAIF invests in startups developing tools to enhance AI safety, security, and responsible deployment.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="mt-8 flex justify-center">
               <Link
                 href="/request"
                 className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
@@ -57,25 +57,16 @@ export default async function Home() {
                 Request Funding
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-              <Link
-                href="/thesis"
-                className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-5 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
-              >
-                Our Investment Thesis
-              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* What We Do Section */}
-      <section className="py-12 bg-muted/30">
+      <section className="py-8 bg-muted/30">
         <div className="container">
-          <div className="mx-auto max-w-2xl text-center mb-10">
+          <div className="mx-auto max-w-2xl text-center mb-6">
             <h2 className="text-2xl font-bold tracking-tight">What We Offer</h2>
-            <p className="mt-2 text-muted-foreground">
-              $100K on a SAFE with a $10mm cap, plus mentorship and network access
-            </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto">
