@@ -3,7 +3,7 @@ import { ExternalLink } from 'lucide-react'
 import type { PortfolioCompany } from '@/types/database'
 import { RealtimeRefresh } from '@/components/RealtimeRefresh'
 
-export const revalidate = 60 // Reduced to 1 minute for faster updates
+export const revalidate = 5 // Revalidate every 5 seconds for near-instant updates
 
 async function getCompanies(): Promise<PortfolioCompany[]> {
   const { data } = await supabase

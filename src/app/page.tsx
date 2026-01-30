@@ -6,7 +6,7 @@ import { PortfolioCarousel } from '@/components/PortfolioCarousel'
 import { RealtimeRefresh } from '@/components/RealtimeRefresh'
 import type { BlogPost, TeamMember, PortfolioCompany } from '@/types/database'
 
-export const revalidate = 60 // Reduced to 1 minute for faster updates
+export const revalidate = 5 // Revalidate every 5 seconds for near-instant updates
 
 type BlogPostWithAuthor = BlogPost & { author: TeamMember | null }
 

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 
 interface RealtimeRefreshProps {
@@ -10,11 +9,7 @@ interface RealtimeRefreshProps {
 }
 
 export function RealtimeRefresh({ table, children }: RealtimeRefreshProps) {
-  const router = useRouter()
-
   useEffect(() => {
-    console.log(`[RealtimeRefresh] Setting up subscription for ${table}`)
-
     const channel = supabase
       .channel(`${table}-changes`)
       .on(
@@ -24,20 +19,19 @@ export function RealtimeRefresh({ table, children }: RealtimeRefreshProps) {
           schema: 'public',
           table: table,
         },
-        (payload) => {
-          console.log(`[RealtimeRefresh] Change detected:`, payload)
-          router.refresh()
+        () => {
+          // Add cache-busting query param to bypass Vercel's ISR cache
+          const url = new URL(window.location.href)
+          url.searchParams.set('_t', Date.now().toString())
+          window.location.href = url.toString()
         }
       )
-      .subscribe((status) => {
-        console.log(`[RealtimeRefresh] Subscription status:`, status)
-      })
+      .subscribe()
 
     return () => {
-      console.log(`[RealtimeRefresh] Cleaning up subscription for ${table}`)
       supabase.removeChannel(channel)
     }
-  }, [table, router])
+  }, [table])
 
   return <>{children}</>
 }
