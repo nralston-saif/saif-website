@@ -312,7 +312,7 @@ export function FundingRequestForm() {
         ) : (
           <>
             <Send className="h-4 w-4" />
-            Submit Application
+            Submit Request
           </>
         )}
       </Button>
