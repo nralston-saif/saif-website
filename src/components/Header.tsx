@@ -17,6 +17,13 @@ export function Header() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (pathname === '/') {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   useEffect(() => {
     setMobileMenuOpen(false)
   }, [pathname])
@@ -35,7 +42,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
+        <Link href="/" onClick={handleHomeClick} className="flex items-center space-x-2">
           <span className="text-3xl tracking-tight font-[family-name:var(--font-montserrat)]">
             S<span className="font-bold">AI</span>F
           </span>
@@ -46,6 +53,7 @@ export function Header() {
             <Link
               key={item.name}
               href={item.href}
+              onClick={item.href === '/' ? handleHomeClick : undefined}
               className={cn(
                 'text-sm font-medium transition-colors hover:text-primary',
                 pathname === item.href
@@ -110,6 +118,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={item.href === '/' ? handleHomeClick : undefined}
                 className={cn(
                   'text-base font-medium transition-colors hover:text-primary py-2',
                   pathname === item.href
