@@ -93,7 +93,7 @@ export default async function Home() {
 
         {/* Latest News */}
         {latestPosts.length > 0 && (
-          <section className="py-8 bg-muted/30">
+          <section className="py-8">
             <div className="container">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold tracking-tight">Latest News</h2>
@@ -105,37 +105,48 @@ export default async function Home() {
                 </Link>
               </div>
               <div className="space-y-2">
-                {latestPosts.map((post) => (
-                  <div key={post.id} className="flex items-center justify-between py-2 border-b border-gray-200/60 last:border-0">
-                    <div className="flex-1 min-w-0">
-                      {post.source_url ? (
-                        <a
-                          href={post.source_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm font-medium hover:text-primary transition-colors inline-flex items-center gap-1"
-                        >
-                          <span className="truncate">{post.title}</span>
-                          <svg className="h-3 w-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                        </a>
-                      ) : (
-                        <Link href={`/blog/${post.slug}`} className="text-sm font-medium hover:text-primary transition-colors truncate block">
-                          {post.title}
-                        </Link>
-                      )}
-                    </div>
-                    {post.published_at && (
-                      <span className="text-xs text-muted-foreground ml-4 flex-shrink-0">
-                        {new Date(post.published_at).toLocaleDateString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                        })}
+                {latestPosts.map((post) =>
+                  post.source_url ? (
+                    <a
+                      key={post.id}
+                      href={post.source_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between py-3 px-4 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="text-sm font-medium inline-flex items-center gap-1 min-w-0">
+                        <span className="truncate">{post.title}</span>
+                        <svg className="h-3 w-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
                       </span>
-                    )}
-                  </div>
-                ))}
+                      {post.published_at && (
+                        <span className="text-xs text-muted-foreground ml-4 flex-shrink-0">
+                          {new Date(post.published_at).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </span>
+                      )}
+                    </a>
+                  ) : (
+                    <Link
+                      key={post.id}
+                      href={`/blog/${post.slug}`}
+                      className="flex items-center justify-between py-3 px-4 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="text-sm font-medium truncate min-w-0">{post.title}</span>
+                      {post.published_at && (
+                        <span className="text-xs text-muted-foreground ml-4 flex-shrink-0">
+                          {new Date(post.published_at).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </span>
+                      )}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
           </section>
