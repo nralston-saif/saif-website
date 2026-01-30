@@ -68,12 +68,7 @@ export default async function Home() {
       <section className="py-12">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight">Portfolio</h2>
-              <p className="text-sm text-muted-foreground">
-                Companies building the future of AI safety
-              </p>
-            </div>
+            <h2 className="text-2xl font-bold tracking-tight">Portfolio</h2>
             <Link
               href="/portfolio"
               className="inline-flex items-center text-sm font-medium text-primary hover:underline"
