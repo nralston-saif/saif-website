@@ -52,7 +52,7 @@ export default async function Home() {
               <div className="mt-12 flex justify-center gap-4 flex-wrap">
                 <OfferPill
                   label="$100K Investment"
-                  description="We offer $100K on a $10MM Cap SAFE as a standard but are open to negotiation."
+                  description="Our standard investment is $100,000 on a $10mm cap post-money YC-standard SAFE. However, we can be flexible depending on the circumstances."
                 />
                 <OfferPill
                   label="Mentorship"
