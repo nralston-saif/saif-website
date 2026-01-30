@@ -40,56 +40,24 @@ export default async function Home() {
       <section className="py-12 lg:py-16">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-sm font-medium text-primary mb-4 tracking-wide uppercase">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Safe Artificial Intelligence Fund
-            </p>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text whitespace-nowrap">
-              Building a Safer Future with AI
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              SAIF invests in startups developing tools to enhance AI safety, security, and responsible deployment.
+              Investing in startups to build a safer future with AI
             </p>
-            <div className="mt-8 flex justify-center">
-              <Link
-                href="/request"
-                className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-              >
-                Request Funding
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* What We Do Section */}
-      <section className="py-8 bg-muted/30">
+      {/* What We Offer Section */}
+      <section className="py-8 border-y border-gray-200/60">
         <div className="container">
-          <div className="mx-auto max-w-2xl text-center mb-6">
-            <h2 className="text-2xl font-bold tracking-tight">What We Offer</h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto">
-            <div className="text-center">
-              <h3 className="text-lg font-semibold mb-2">$100K Investment</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                SAFE with $10mm cap to help you build your initial product
-              </p>
-            </div>
-
-            <div className="text-center">
-              <h3 className="text-lg font-semibold mb-2">Mentorship</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Weekly office hours to discuss strategy and product
-              </p>
-            </div>
-
-            <div className="text-center">
-              <h3 className="text-lg font-semibold mb-2">Network Access</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Intros to AI-focused VCs and strategic partners
-              </p>
-            </div>
+          <h2 className="text-lg font-semibold tracking-tight text-center mb-4">What We Offer</h2>
+          <div className="flex justify-center gap-3 flex-wrap">
+            <span className="px-4 py-2 rounded-full bg-white text-sm font-medium">$100K Investment</span>
+            <span className="px-4 py-2 rounded-full bg-white text-sm font-medium">Mentorship</span>
+            <span className="px-4 py-2 rounded-full bg-white text-sm font-medium">Network Access</span>
           </div>
         </div>
       </section>
@@ -178,17 +146,17 @@ export default async function Home() {
       )}
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      <section className="py-16 border-t border-gray-200/60">
         <div className="container text-center">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
             Building something that makes AI safer?
           </h2>
-          <p className="mt-3 text-primary-foreground/80 max-w-lg mx-auto">
-            We&apos;re looking for founders with deep expertise and scalable ideas in AI Safety.
+          <p className="mt-3 text-muted-foreground max-w-lg mx-auto">
+            We&apos;re looking for founders with deep expertise and scalable ideas.
           </p>
           <Link
             href="/request"
-            className="mt-6 inline-flex h-10 items-center justify-center rounded-md bg-background text-foreground px-5 text-sm font-medium hover:bg-background/90 transition-colors"
+            className="mt-6 inline-flex h-10 items-center justify-center rounded-md bg-foreground text-background px-5 text-sm font-medium hover:bg-foreground/90 transition-colors"
           >
             Request Funding
             <ArrowRight className="ml-2 h-4 w-4" />
