@@ -1,8 +1,9 @@
 import { supabase } from '@/lib/supabase'
 import { ExternalLink } from 'lucide-react'
 import type { PortfolioCompany } from '@/types/database'
+import { RealtimeRefresh } from '@/components/RealtimeRefresh'
 
-export const revalidate = 3600
+export const revalidate = 60 // Reduced to 1 minute for faster updates
 
 async function getCompanies(): Promise<PortfolioCompany[]> {
   const { data } = await supabase
@@ -21,6 +22,7 @@ export default async function PortfolioPage() {
   const companies = await getCompanies()
 
   return (
+    <RealtimeRefresh table="website_portfolio_companies">
     <div className="py-24">
       <div className="container">
         <div className="max-w-2xl">
@@ -79,5 +81,6 @@ export default async function PortfolioPage() {
         </div>
       </div>
     </div>
+    </RealtimeRefresh>
   )
 }

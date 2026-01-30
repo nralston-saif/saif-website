@@ -3,9 +3,10 @@ import { supabase } from '@/lib/supabase'
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowRight } from 'lucide-react'
 import { PortfolioCarousel } from '@/components/PortfolioCarousel'
+import { RealtimeRefresh } from '@/components/RealtimeRefresh'
 import type { BlogPost, TeamMember, PortfolioCompany } from '@/types/database'
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 60 // Reduced to 1 minute for faster updates
 
 type BlogPostWithAuthor = BlogPost & { author: TeamMember | null }
 
@@ -35,6 +36,7 @@ export default async function Home() {
   ])
 
   return (
+    <RealtimeRefresh table="website_portfolio_companies">
     <div>
       {/* Hero Section */}
       <section className="py-12 lg:py-16">
@@ -164,5 +166,6 @@ export default async function Home() {
         </div>
       </section>
     </div>
+    </RealtimeRefresh>
   )
 }
