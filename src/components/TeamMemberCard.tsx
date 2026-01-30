@@ -25,23 +25,23 @@ export function TeamMemberCard({ member, isExpanded, onToggle }: TeamMemberCardP
           <img
             src={member.photo_url}
             alt={member.name}
-            className="mb-4 h-32 w-32 rounded-full object-cover mx-auto"
+            className="mb-4 h-24 w-24 sm:h-32 sm:w-32 rounded-full object-cover mx-auto"
           />
         ) : (
-          <div className="mb-4 h-32 w-32 rounded-full bg-muted mx-auto" />
+          <div className="mb-4 h-24 w-24 sm:h-32 sm:w-32 rounded-full bg-muted mx-auto" />
         )}
         <CardTitle className="text-center">{member.name}</CardTitle>
         <CardDescription className="text-center">{member.role}</CardDescription>
 
         {/* Social links - always visible */}
         {hasLinks && (
-          <div className="mt-4 flex justify-center gap-4">
+          <div className="mt-4 flex justify-center gap-2">
             {member.linkedin_url && (
               <a
                 href={member.linkedin_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground"
+                className="p-2 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted transition-colors"
                 onClick={(e) => e.stopPropagation()}
               >
                 <Linkedin className="h-5 w-5" />
@@ -52,7 +52,7 @@ export function TeamMemberCard({ member, isExpanded, onToggle }: TeamMemberCardP
                 href={member.twitter_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground"
+                className="p-2 text-muted-foreground hover:text-foreground rounded-full hover:bg-muted transition-colors"
                 onClick={(e) => e.stopPropagation()}
               >
                 <Twitter className="h-5 w-5" />
@@ -101,7 +101,7 @@ export function TeamMemberGrid({ members }: TeamMemberGridProps) {
   }
 
   return (
-    <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-8 sm:mt-16 grid gap-4 sm:gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
       {members.map((member) => (
         <TeamMemberCard
           key={member.id}

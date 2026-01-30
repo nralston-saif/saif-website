@@ -21,10 +21,10 @@ export default async function TeamPage() {
   const members = await getTeamMembers()
 
   return (
-    <div className="py-24">
+    <div className="py-12 sm:py-24">
       <div className="container">
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight">Our Team</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Our Team</h1>
         </div>
 
         <TeamMemberGrid members={members} />

@@ -21,17 +21,17 @@ export default async function ThesisPage() {
   const themes = await getThemes()
 
   return (
-    <div className="py-24">
+    <div className="py-12 sm:py-24">
       <div className="container">
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight">Investment Thesis</h1>
-          <p className="mt-4 text-muted-foreground">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Investment Thesis</h1>
+          <p className="mt-4 text-sm sm:text-base text-muted-foreground">
             These are some of the themes in which we are most interested, but this
             is not meant to be a complete list of all possible categories of AI safety.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
+        <div className="mt-8 sm:mt-16 grid gap-4 sm:gap-6 md:grid-cols-2">
           {themes.map((theme, index) => (
             <Card key={theme.id} className="p-6">
               <div className="flex gap-4">

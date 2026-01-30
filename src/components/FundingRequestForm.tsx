@@ -214,7 +214,7 @@ export function FundingRequestForm() {
           placeholder="We're building..."
           required
           defaultValue={state.values?.companyDescription}
-          className="min-h-[120px]"
+          className="min-h-[80px] sm:min-h-[120px]"
           aria-invalid={!!state.errors?.companyDescription}
         />
         {state.errors?.companyDescription && (
@@ -235,7 +235,7 @@ export function FundingRequestForm() {
           placeholder="Jane has 10 years of experience in..."
           required
           defaultValue={state.values?.founderBios}
-          className="min-h-[120px]"
+          className="min-h-[80px] sm:min-h-[120px]"
           aria-invalid={!!state.errors?.founderBios}
         />
         {state.errors?.founderBios && (
@@ -286,7 +286,7 @@ export function FundingRequestForm() {
           name="previousFunding"
           placeholder="We raised a $500k pre-seed from... / We were part of Y Combinator W24..."
           defaultValue={state.values?.previousFunding}
-          className="min-h-[100px]"
+          className="min-h-[80px] sm:min-h-[100px]"
         />
       </div>
 

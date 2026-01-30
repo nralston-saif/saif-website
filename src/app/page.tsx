@@ -43,10 +43,10 @@ export default async function Home() {
         <div className="container">
           <ScrollReveal direction="down">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                 Safe Artificial Intelligence Fund
               </h1>
-              <p className="mt-6 text-xl text-muted-foreground">
+              <p className="mt-6 text-lg sm:text-xl text-muted-foreground">
                 Investing in startups to build a safer future with AI
               </p>
               <div className="mt-12 flex justify-center gap-4 flex-wrap">

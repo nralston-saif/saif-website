@@ -27,16 +27,16 @@ export default async function BlogPage() {
   const posts = await getBlogPosts()
 
   return (
-    <div className="py-24">
+    <div className="py-12 sm:py-24">
       <div className="container">
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight">News/Blog</h1>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">News/Blog</h1>
+          <p className="mt-4 text-base sm:text-lg text-muted-foreground">
             Thoughts, news, and insights on AI safety from our team and the press.
           </p>
         </div>
 
-        <div className="mt-16 space-y-8">
+        <div className="mt-8 sm:mt-16 space-y-4 sm:space-y-8">
           {posts.map((post) => (
             <Card key={post.id}>
               <CardHeader>
@@ -59,7 +59,7 @@ export default async function BlogPage() {
                     </>
                   )}
                 </div>
-                <CardTitle className="text-2xl">
+                <CardTitle className="text-xl sm:text-2xl">
                   {post.source_url ? (
                     <a
                       href={post.source_url}

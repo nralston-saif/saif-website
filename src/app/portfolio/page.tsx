@@ -23,18 +23,18 @@ export default async function PortfolioPage() {
 
   return (
     <RealtimeRefresh table="website_portfolio_companies">
-    <div className="py-24">
+    <div className="py-12 sm:py-24">
       <div className="container">
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight">Portfolio</h1>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Portfolio</h1>
+          <p className="mt-4 text-base sm:text-lg text-muted-foreground">
             We invest in great founders building tools to enhance AI safety,
             security, and responsible deployment. Here are the companies we&apos;re
             proud to support.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 sm:mt-16 grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {companies.map((company) => (
             <a
               key={company.id}
