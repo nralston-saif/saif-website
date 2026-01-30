@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowRight } from 'lucide-react'
 import { PortfolioCarousel } from '@/components/PortfolioCarousel'
 import { RealtimeRefresh } from '@/components/RealtimeRefresh'
+import { OfferPill } from '@/components/OfferPill'
 import type { BlogPost, TeamMember, PortfolioCompany } from '@/types/database'
 
 export const revalidate = 5 // Revalidate every 5 seconds for near-instant updates
@@ -18,21 +18,20 @@ async function getAllCompanies(): Promise<PortfolioCompany[]> {
   return (data as PortfolioCompany[]) || []
 }
 
-async function getLatestPost(): Promise<BlogPostWithAuthor | null> {
+async function getLatestPosts(): Promise<BlogPostWithAuthor[]> {
   const { data } = await supabase
     .from('website_blog_posts')
     .select('*, author:website_team_members(*)')
     .eq('published', true)
     .order('published_at', { ascending: false })
-    .limit(1)
-    .single()
-  return data as BlogPostWithAuthor | null
+    .limit(3)
+  return (data as BlogPostWithAuthor[]) || []
 }
 
 export default async function Home() {
-  const [companies, latestPost] = await Promise.all([
+  const [companies, latestPosts] = await Promise.all([
     getAllCompanies(),
-    getLatestPost(),
+    getLatestPosts(),
   ])
 
   return (
@@ -52,14 +51,22 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* What We Offer Section */}
+      {/* Offers Section */}
       <section className="py-8 border-y border-gray-200/60">
         <div className="container">
-          <h2 className="text-lg font-semibold tracking-tight text-center mb-4">What We Offer</h2>
           <div className="flex justify-center gap-3 flex-wrap">
-            <span className="px-4 py-2 rounded-full bg-white text-sm font-medium">$100K Investment</span>
-            <span className="px-4 py-2 rounded-full bg-white text-sm font-medium">Mentorship</span>
-            <span className="px-4 py-2 rounded-full bg-white text-sm font-medium">Network Access</span>
+            <OfferPill
+              label="$100K Investment"
+              description="We offer $100K on a $10MM Cap SAFE as a standard but are open to negotiation."
+            />
+            <OfferPill
+              label="Mentorship"
+              description="SAIF founder Geoff Ralston is a longtime Silicon Valley entrepreneur, investor, and technologist committed to building a safer future with AI. He served as President of Y Combinator and previously co-founded Imagine K12—an edtech accelerator that merged with YC."
+            />
+            <OfferPill
+              label="Network Access"
+              description="Access to SAIF's network of other safety focused funds along with Geoff's broader startup and founder network."
+            />
           </div>
         </div>
       </section>
@@ -82,12 +89,12 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Latest Blog Post */}
-      {latestPost && (
-        <section className="py-12 bg-muted/30">
+      {/* Latest News */}
+      {latestPosts.length > 0 && (
+        <section className="py-8 bg-muted/30">
           <div className="container">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold tracking-tight">Latest News</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold tracking-tight">Latest News</h2>
               <Link
                 href="/blog"
                 className="text-sm font-medium text-primary hover:underline"
@@ -95,49 +102,39 @@ export default async function Home() {
                 All posts →
               </Link>
             </div>
-            <Card className="border-0 shadow-sm overflow-hidden">
-              <CardHeader>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
-                  {latestPost.author?.name && <span>{latestPost.author.name}</span>}
-                  {latestPost.published_at && (
-                    <>
-                      <span>•</span>
-                      <span>
-                        {new Date(latestPost.published_at).toLocaleDateString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric',
-                        })}
-                      </span>
-                    </>
+            <div className="space-y-2">
+              {latestPosts.map((post) => (
+                <div key={post.id} className="flex items-center justify-between py-2 border-b border-gray-200/60 last:border-0">
+                  <div className="flex-1 min-w-0">
+                    {post.source_url ? (
+                      <a
+                        href={post.source_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium hover:text-primary transition-colors inline-flex items-center gap-1"
+                      >
+                        <span className="truncate">{post.title}</span>
+                        <svg className="h-3 w-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <Link href={`/blog/${post.slug}`} className="text-sm font-medium hover:text-primary transition-colors truncate block">
+                        {post.title}
+                      </Link>
+                    )}
+                  </div>
+                  {post.published_at && (
+                    <span className="text-xs text-muted-foreground ml-4 flex-shrink-0">
+                      {new Date(post.published_at).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </span>
                   )}
                 </div>
-                <CardTitle className="text-xl">
-                  {latestPost.source_url ? (
-                    <a
-                      href={latestPost.source_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-primary transition-colors inline-flex items-center gap-2"
-                    >
-                      {latestPost.title}
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  ) : (
-                    <Link href={`/blog/${latestPost.slug}`} className="hover:text-primary transition-colors">
-                      {latestPost.title}
-                    </Link>
-                  )}
-                </CardTitle>
-                {latestPost.excerpt && (
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {latestPost.excerpt}
-                  </p>
-                )}
-              </CardHeader>
-            </Card>
+              ))}
+            </div>
           </div>
         </section>
       )}
