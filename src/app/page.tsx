@@ -38,35 +38,29 @@ export default async function Home() {
     <RealtimeRefresh table="website_portfolio_companies">
     <div>
       {/* Hero Section */}
-      <section className="py-12 lg:py-16">
+      <section className="pt-12 lg:pt-16 pb-8">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Safe Artificial Intelligence Fund
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Investing in startups to build a safer future with AI
+            <div className="mt-6 flex justify-center gap-3 flex-wrap">
+              <OfferPill
+                label="$100K Investment"
+                description="We offer $100K on a $10MM Cap SAFE as a standard but are open to negotiation."
+              />
+              <OfferPill
+                label="Mentorship"
+                description="SAIF founder Geoff Ralston is a longtime Silicon Valley entrepreneur, investor, and technologist committed to building a safer future with AI. He served as President of Y Combinator and previously co-founded Imagine K12—an edtech accelerator that merged with YC."
+              />
+              <OfferPill
+                label="Network Access"
+                description="Access to SAIF's network of other safety focused funds along with Geoff's broader startup and founder network."
+              />
+            </div>
+            <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto">
+              The Safe Artificial Intelligence Fund is an early-stage venture fund dedicated to supporting startups developing tools to enhance AI safety, security, and responsible deployment.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Offers Section */}
-      <section className="py-8 border-y border-gray-200/60">
-        <div className="container">
-          <div className="flex justify-center gap-3 flex-wrap">
-            <OfferPill
-              label="$100K Investment"
-              description="We offer $100K on a $10MM Cap SAFE as a standard but are open to negotiation."
-            />
-            <OfferPill
-              label="Mentorship"
-              description="SAIF founder Geoff Ralston is a longtime Silicon Valley entrepreneur, investor, and technologist committed to building a safer future with AI. He served as President of Y Combinator and previously co-founded Imagine K12—an edtech accelerator that merged with YC."
-            />
-            <OfferPill
-              label="Network Access"
-              description="Access to SAIF's network of other safety focused funds along with Geoff's broader startup and founder network."
-            />
           </div>
         </div>
       </section>
@@ -143,18 +137,8 @@ export default async function Home() {
       <section className="py-16 border-t border-gray-200/60">
         <div className="container text-center">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-            Building something that makes AI safer?
+            Build something that makes AI safe.
           </h2>
-          <p className="mt-3 text-muted-foreground max-w-lg mx-auto">
-            We&apos;re looking for founders with deep expertise and scalable ideas.
-          </p>
-          <Link
-            href="/request"
-            className="mt-6 inline-flex h-10 items-center justify-center rounded-md bg-foreground text-background px-5 text-sm font-medium hover:bg-foreground/90 transition-colors"
-          >
-            Request Funding
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
         </div>
       </section>
     </div>
