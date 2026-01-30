@@ -46,10 +46,10 @@ export default async function Home() {
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
                 Safe Artificial Intelligence Fund
               </h1>
-              <p className="mt-4 text-lg text-muted-foreground">
+              <p className="mt-6 text-xl text-muted-foreground">
                 Investing in startups to build a safer future with AI
               </p>
-              <div className="mt-8 flex justify-center gap-3 flex-wrap">
+              <div className="mt-12 flex justify-center gap-4 flex-wrap">
                 <OfferPill
                   label="$100K Investment"
                   description="We offer $100K on a $10MM Cap SAFE as a standard but are open to negotiation."
@@ -63,7 +63,7 @@ export default async function Home() {
                   description="Access to SAIF's network of other safety focused funds along with Geoff's broader startup and founder network."
                 />
               </div>
-              <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto">
+              <p className="mt-24 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 The Safe Artificial Intelligence Fund is an early-stage venture fund dedicated to supporting startups developing tools to enhance AI safety, security, and responsible deployment.
               </p>
             </div>
