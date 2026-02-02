@@ -41,7 +41,7 @@ export default async function PortfolioPage() {
               href={company.website_url || '#'}
               target={company.website_url ? '_blank' : undefined}
               rel={company.website_url ? 'noopener noreferrer' : undefined}
-              className={`group block rounded-lg border bg-card p-6 transition-all hover:shadow-lg hover:border-primary/20 ${
+              className={`group block rounded-lg border bg-white/60 p-6 transition-all hover:shadow-lg hover:border-primary/20 ${
                 company.website_url ? 'cursor-pointer' : 'cursor-default'
               }`}
             >
@@ -64,8 +64,8 @@ export default async function PortfolioPage() {
 
               {/* Company Info */}
               <div className="text-center">
-                <h3 className="font-semibold text-lg flex items-center justify-center gap-2">
-                  {company.name}
+                <h3 className="font-semibold text-lg flex items-center justify-center gap-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                  <span className="truncate">{company.name}</span>
                   {company.website_url && (
                     <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                   )}

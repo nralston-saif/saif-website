@@ -14,7 +14,7 @@ function CompanyCard({ company }: { company: PortfolioCompany }) {
       href={company.website_url || '#'}
       target={company.website_url ? '_blank' : undefined}
       rel={company.website_url ? 'noopener noreferrer' : undefined}
-      className={`block rounded-xl border bg-card p-5 transition-all hover:shadow-md hover:border-primary/20 h-[170px] flex flex-col ${
+      className={`block rounded-xl border bg-white/60 p-5 transition-all hover:shadow-md hover:border-primary/20 h-[170px] flex flex-col ${
         company.website_url ? 'cursor-pointer' : 'cursor-default'
       }`}
     >
@@ -34,7 +34,7 @@ function CompanyCard({ company }: { company: PortfolioCompany }) {
         )}
       </div>
       <div className="text-center flex-1 flex flex-col justify-start">
-        <h3 className="font-semibold text-sm">{company.name}</h3>
+        <h3 className="font-semibold text-base">{company.name}</h3>
         {company.tagline && (
           <p className="mt-1 text-xs text-muted-foreground line-clamp-2">
             {company.tagline}

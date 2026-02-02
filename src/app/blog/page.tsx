@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ExternalLink } from 'lucide-react'
 import type { BlogPost, TeamMember } from '@/types/database'
 
 export const revalidate = 600 // Revalidate every 10 minutes
@@ -37,63 +36,67 @@ export default async function BlogPage() {
         </div>
 
         <div className="mt-8 sm:mt-16 space-y-4 sm:space-y-8">
-          {posts.map((post) => (
-            <Card key={post.id}>
-              <CardHeader>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  {post.source ? (
-                    <Badge variant="outline">{post.source}</Badge>
-                  ) : post.author?.name ? (
-                    <span>{post.author.name}</span>
-                  ) : null}
-                  {post.published_at && (
-                    <>
-                      <span>•</span>
-                      <span>
-                        {new Date(post.published_at).toLocaleDateString('en-US', {
-                          month: 'long',
-                          day: 'numeric',
-                          year: 'numeric',
-                        })}
-                      </span>
-                    </>
-                  )}
-                </div>
-                <CardTitle className="text-xl sm:text-2xl">
-                  {post.source_url ? (
-                    <a
-                      href={post.source_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline inline-flex items-center gap-2"
-                    >
-                      {post.title}
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  ) : (
-                    <Link href={`/blog/${post.slug}`} className="hover:underline">
-                      {post.title}
-                    </Link>
-                  )}
-                </CardTitle>
-                {post.excerpt && (
-                  <CardDescription className="text-base">
-                    {post.excerpt}
-                  </CardDescription>
-                )}
-              </CardHeader>
-              {!post.source_url && (
-                <CardContent>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="text-sm font-medium text-primary hover:underline"
-                  >
-                    Read more →
-                  </Link>
-                </CardContent>
-              )}
-            </Card>
-          ))}
+          {posts.map((post) =>
+            post.source_url ? (
+              <a
+                key={post.id}
+                href={post.source_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <Card className="transition-all hover:shadow-md hover:border-primary/20 cursor-pointer">
+                  <CardHeader>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      {post.source && <Badge variant="outline">{post.source}</Badge>}
+                      {post.published_at && (
+                        <>
+                          {post.source && <span>•</span>}
+                          <span>
+                            {new Date(post.published_at).toLocaleDateString('en-US', {
+                              month: 'long',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                    <CardTitle className="text-xl sm:text-2xl">{post.title}</CardTitle>
+                    {post.excerpt && (
+                      <CardDescription className="text-base">{post.excerpt}</CardDescription>
+                    )}
+                  </CardHeader>
+                </Card>
+              </a>
+            ) : (
+              <Link key={post.id} href={`/blog/${post.slug}`} className="block">
+                <Card className="transition-all hover:shadow-md hover:border-primary/20 cursor-pointer">
+                  <CardHeader>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      {post.author?.name && <span>{post.author.name}</span>}
+                      {post.published_at && (
+                        <>
+                          {post.author?.name && <span>•</span>}
+                          <span>
+                            {new Date(post.published_at).toLocaleDateString('en-US', {
+                              month: 'long',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                    <CardTitle className="text-xl sm:text-2xl">{post.title}</CardTitle>
+                    {post.excerpt && (
+                      <CardDescription className="text-base">{post.excerpt}</CardDescription>
+                    )}
+                  </CardHeader>
+                </Card>
+              </Link>
+            )
+          )}
         </div>
       </div>
     </div>

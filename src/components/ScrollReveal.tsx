@@ -94,7 +94,7 @@ export function CollapsibleHero({ children, className = '' }: { children: React.
     <>
       {/* Fixed hero background */}
       <div
-        className={`fixed inset-x-0 top-16 bottom-0 flex items-center justify-center z-0 transition-opacity duration-700 ease-out ${
+        className={`fixed inset-x-0 top-16 bottom-0 flex items-center justify-center -translate-y-12 z-0 transition-opacity duration-700 ease-out ${
           isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'
         } ${className}`}
       >

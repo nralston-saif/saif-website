@@ -26,6 +26,9 @@ export default async function ThesisPage() {
         <div className="max-w-2xl">
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Investment Thesis</h1>
           <p className="mt-4 text-sm sm:text-base text-muted-foreground">
+            The Safe Artificial Intelligence Fund is an early-stage venture fund dedicated to supporting startups developing tools to enhance AI safety, security, and responsible deployment.
+          </p>
+          <p className="mt-4 text-sm sm:text-base text-muted-foreground">
             These are some of the themes in which we are most interested, but this
             is not meant to be a complete list of all possible categories of AI safety.
           </p>

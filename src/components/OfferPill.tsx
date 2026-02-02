@@ -32,7 +32,7 @@ export function OfferPill({ label, description }: OfferPillProps) {
     <div className="relative" ref={pillRef}>
       <button
         type="button"
-        className="px-4 py-2 rounded-full bg-white text-sm font-medium hover:bg-gray-50 transition-colors"
+        className="px-4 py-2 rounded-full bg-white/60 text-sm font-medium hover:bg-white/60 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
@@ -41,8 +41,8 @@ export function OfferPill({ label, description }: OfferPillProps) {
         {label}
       </button>
       {isOpen && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[calc(100vw-2rem)] max-w-xs sm:w-72 p-3 bg-white rounded-lg shadow-lg border border-gray-200 text-sm text-muted-foreground z-50">
-          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-gray-200 rotate-45" />
+        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[calc(100vw-2rem)] max-w-xs sm:w-72 p-3 bg-white/60 rounded-lg shadow-lg border border-gray-200 text-sm text-muted-foreground z-50">
+          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-white/60 border-l border-t border-gray-200 rotate-45" />
           <p className="relative">{description}</p>
         </div>
       )}
