@@ -15,7 +15,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "SAIF - Safe Artificial Intelligence Fund",
+  title: "Safe Artificial Intelligence Fund",
   description: "An early-stage venture fund dedicated to supporting startups developing tools to enhance AI safety, security, and responsible deployment.",
   openGraph: {
     title: "SAIF - Safe Artificial Intelligence Fund",
