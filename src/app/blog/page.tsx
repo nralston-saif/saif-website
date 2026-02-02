@@ -43,7 +43,7 @@ export default async function BlogPage() {
                 href={post.source_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block"
+                className="group block"
               >
                 <Card className="transition-all hover:shadow-md hover:border-primary/20 cursor-pointer">
                   <CardHeader>
@@ -62,7 +62,7 @@ export default async function BlogPage() {
                         </>
                       )}
                     </div>
-                    <CardTitle className="text-xl sm:text-2xl">{post.title}</CardTitle>
+                    <CardTitle className="text-xl sm:text-2xl group-hover:underline">{post.title}</CardTitle>
                     {post.excerpt && (
                       <CardDescription className="text-base">{post.excerpt}</CardDescription>
                     )}
@@ -70,7 +70,7 @@ export default async function BlogPage() {
                 </Card>
               </a>
             ) : (
-              <Link key={post.id} href={`/blog/${post.slug}`} className="block">
+              <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
                 <Card className="transition-all hover:shadow-md hover:border-primary/20 cursor-pointer">
                   <CardHeader>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -88,7 +88,7 @@ export default async function BlogPage() {
                         </>
                       )}
                     </div>
-                    <CardTitle className="text-xl sm:text-2xl">{post.title}</CardTitle>
+                    <CardTitle className="text-xl sm:text-2xl group-hover:underline">{post.title}</CardTitle>
                     {post.excerpt && (
                       <CardDescription className="text-base">{post.excerpt}</CardDescription>
                     )}

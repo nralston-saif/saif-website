@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PortfolioCarousel } from '@/components/PortfolioCarousel'
 import { RealtimeRefresh } from '@/components/RealtimeRefresh'
 import { ScrollReveal, CollapsibleHero } from '@/components/ScrollReveal'
@@ -66,6 +66,9 @@ export default async function Home() {
             </div>
           </ScrollReveal>
         </div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+          <ChevronDown className="h-6 w-6 text-muted-foreground animate-bounce" />
+        </div>
       </CollapsibleHero>
 
       {/* Below-fold content with unified animation */}
@@ -90,15 +93,16 @@ export default async function Home() {
 
         {/* Latest News */}
         {latestPosts.length > 0 && (
-          <section className="py-8">
+          <section className="py-12">
             <div className="container">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold tracking-tight">Latest News</h2>
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-bold tracking-tight">Latest News</h2>
                 <Link
                   href="/blog"
-                  className="text-sm font-medium text-primary hover:underline"
+                  className="inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
-                  All posts →
+                  View all
+                  <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
               </div>
               <div className="space-y-2">
@@ -109,9 +113,9 @@ export default async function Home() {
                       href={post.source_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between py-3 px-4 bg-white/60 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="group flex items-center justify-between py-3 px-4 bg-white/60 rounded-lg border border-transparent hover:border-primary/20 hover:shadow-sm transition-all"
                     >
-                      <span className="text-sm font-medium truncate min-w-0">{post.title}</span>
+                      <span className="text-sm font-medium truncate min-w-0 group-hover:underline">{post.title}</span>
                       {post.published_at && (
                         <span className="text-xs text-muted-foreground ml-4 flex-shrink-0">
                           {new Date(post.published_at).toLocaleDateString('en-US', {
@@ -125,9 +129,9 @@ export default async function Home() {
                     <Link
                       key={post.id}
                       href={`/blog/${post.slug}`}
-                      className="flex items-center justify-between py-3 px-4 bg-white/60 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="group flex items-center justify-between py-3 px-4 bg-white/60 rounded-lg border border-transparent hover:border-primary/20 hover:shadow-sm transition-all"
                     >
-                      <span className="text-sm font-medium truncate min-w-0">{post.title}</span>
+                      <span className="text-sm font-medium truncate min-w-0 group-hover:underline">{post.title}</span>
                       {post.published_at && (
                         <span className="text-xs text-muted-foreground ml-4 flex-shrink-0">
                           {new Date(post.published_at).toLocaleDateString('en-US', {

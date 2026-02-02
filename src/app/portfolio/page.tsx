@@ -1,5 +1,4 @@
 import { supabase } from '@/lib/supabase'
-import { ExternalLink } from 'lucide-react'
 import type { PortfolioCompany } from '@/types/database'
 import { RealtimeRefresh } from '@/components/RealtimeRefresh'
 
@@ -64,11 +63,8 @@ export default async function PortfolioPage() {
 
               {/* Company Info */}
               <div className="text-center">
-                <h3 className="font-semibold text-lg flex items-center justify-center gap-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                  <span className="truncate">{company.name}</span>
-                  {company.website_url && (
-                    <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                  )}
+                <h3 className="font-semibold text-lg group-hover:underline">
+                  {company.name}
                 </h3>
                 {company.tagline && (
                   <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
