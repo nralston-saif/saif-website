@@ -9,7 +9,7 @@ export default function BlogLoading() {
 
         <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="rounded-lg border bg-card overflow-hidden">
+            <div key={i} className="rounded-lg border bg-white/60 overflow-hidden">
               <div className="p-6 space-y-4">
                 <div className="h-4 w-24 bg-muted animate-pulse rounded" />
                 <div className="h-6 w-full bg-muted animate-pulse rounded" />

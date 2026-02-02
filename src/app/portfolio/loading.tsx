@@ -12,7 +12,7 @@ export default function PortfolioLoading() {
           {Array.from({ length: 6 }).map((_, i) => (
             <div
               key={i}
-              className="rounded-lg border bg-card p-6"
+              className="rounded-lg border bg-white/60 p-6"
             >
               <div className="flex items-center justify-center h-24 mb-6">
                 <div className="h-16 w-16 rounded-lg bg-muted animate-pulse" />

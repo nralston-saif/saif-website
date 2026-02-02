@@ -10,7 +10,7 @@ export default function ThesisLoading() {
 
         <div className="mt-16 grid gap-8 md:grid-cols-2">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="rounded-lg border bg-card p-6">
+            <div key={i} className="rounded-lg border bg-white/60 p-6">
               <div className="h-6 w-48 bg-muted animate-pulse rounded" />
               <div className="mt-4 space-y-2">
                 <div className="h-4 w-full bg-muted animate-pulse rounded" />
