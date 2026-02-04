@@ -15,6 +15,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://saif.vc"),
   title: "Safe Artificial Intelligence Fund",
   description: "An early-stage venture fund dedicated to supporting startups developing tools to enhance AI safety, security, and responsible deployment.",
   openGraph: {
@@ -33,14 +34,16 @@ export const metadata: Metadata = {
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "FundingScheme"],
   name: "Safe Artificial Intelligence Fund",
   alternateName: "SAIF",
   url: "https://saif.vc",
+  logo: "https://saif.vc/icon.svg",
   description: "An early-stage venture fund dedicated to supporting startups developing tools to enhance AI safety, security, and responsible deployment.",
   foundingDate: "2024",
   areaServed: "Worldwide",
-  knowsAbout: ["Artificial Intelligence", "AI Safety", "Machine Learning", "Venture Capital"],
+  knowsAbout: ["Artificial Intelligence", "AI Safety", "Machine Learning", "Venture Capital", "Responsible AI", "AI Security"],
+  slogan: "Investing in the future of AI safety",
 };
 
 const websiteSchema = {
