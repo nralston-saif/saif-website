@@ -56,16 +56,10 @@ export function FundingRequestForm() {
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
           <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="text-xl font-semibold mb-2">Application Submitted!</h3>
-        <p className="text-muted-foreground mb-4">
-          Thank you for your interest in SAIF. We&apos;ll review your application and get back to you soon.
+        <h3 className="text-xl font-semibold mb-2">Request Submitted!</h3>
+        <p className="text-muted-foreground">
+          Thank you for your interest in SAIF. We&apos;ll review your request and get back to you soon.
         </p>
-        <p className="text-sm text-muted-foreground mb-6">
-          Reference ID: <code className="rounded bg-muted px-2 py-1">{state.submissionId}</code>
-        </p>
-        <Button variant="outline" onClick={resetForm}>
-          Submit Another Application
-        </Button>
       </div>
     )
   }
