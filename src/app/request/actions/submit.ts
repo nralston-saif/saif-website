@@ -8,6 +8,78 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
+function normalizeWebsite(url: string | null): string | null {
+  if (!url) return null
+  try {
+    return url
+      .toLowerCase()
+      .trim()
+      .replace(/^https?:\/\//, '')
+      .replace(/^www\./, '')
+      .replace(/\/$/, '')
+  } catch {
+    return url.toLowerCase().trim()
+  }
+}
+
+async function findOrCreateCompany(
+  companyName: string,
+  website: string | null,
+  description: string | null
+): Promise<string> {
+  const normalizedWebsite = normalizeWebsite(website)
+
+  // 1. Search by name (case-insensitive)
+  const { data: existingByName } = await supabase
+    .from('saif_companies')
+    .select('id')
+    .ilike('name', companyName)
+    .limit(1)
+    .single()
+
+  if (existingByName) {
+    console.log(`Found existing company by name: ${companyName} (${existingByName.id})`)
+    return existingByName.id
+  }
+
+  // 2. Search by normalized website URL
+  if (normalizedWebsite) {
+    const { data: existingByWebsite } = await supabase
+      .from('saif_companies')
+      .select('id')
+      .ilike('website', `%${normalizedWebsite}%`)
+      .limit(1)
+      .single()
+
+    if (existingByWebsite) {
+      console.log(`Found existing company by website: ${website} (${existingByWebsite.id})`)
+      return existingByWebsite.id
+    }
+  }
+
+  // 3. Create new company
+  const { data: newCompany, error } = await supabase
+    .from('saif_companies')
+    .insert({
+      name: companyName,
+      website: website,
+      short_description: description,
+      stage: 'prospect',
+      is_active: true,
+      is_aisafety_company: false,
+    })
+    .select('id')
+    .single()
+
+  if (error) {
+    console.error('Error creating company:', error)
+    throw new Error(`Failed to create company: ${error.message}`)
+  }
+
+  console.log(`Created new prospect company: ${companyName} (${newCompany.id})`)
+  return newCompany.id
+}
+
 const formSchema = z.object({
   founderNames: z.string().min(1, 'At least one founder name is required'),
   founderLinkedins: z.string().min(1, 'At least one LinkedIn URL is required'),
@@ -99,11 +171,24 @@ export async function submitFundingRequest(
   const submissionId = `SAIF-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
 
   try {
-    const { error } = await supabase
+    // Find or create a company record
+    let companyId: string | null = null
+    try {
+      companyId = await findOrCreateCompany(
+        data.companyName,
+        data.website || null,
+        data.companyDescription
+      )
+    } catch (err) {
+      console.error('Failed to find/create company, proceeding without company_id:', err)
+    }
+
+    const { data: application, error } = await supabase
       .from('saifcrm_applications')
       .insert({
         submission_id: submissionId,
         company_name: data.companyName,
+        company_id: companyId,
         founder_names: data.founderNames,
         founder_linkedins: data.founderLinkedins,
         founder_bios: data.founderBios,
@@ -114,6 +199,8 @@ export async function submitFundingRequest(
         deck_link: data.deckLink || null,
         stage: 'new',
       })
+      .select('id')
+      .single()
 
     if (error) {
       console.error('Supabase error:', error)
