@@ -22,6 +22,109 @@ function normalizeWebsite(url: string | null): string | null {
   }
 }
 
+async function createFoundersForCompany(
+  companyId: string,
+  founderNames: string,
+  founderLinkedins: string,
+  primaryEmail: string
+): Promise<void> {
+  const names = founderNames.split('\n').map((n) => n.trim()).filter(Boolean)
+  const linkedins = founderLinkedins.split('\n').map((l) => l.trim()).filter(Boolean)
+
+  for (let i = 0; i < names.length; i++) {
+    const fullName = names[i]
+    const linkedin = linkedins[i] || null
+    const email = i === 0 ? primaryEmail : null
+
+    // Split into first/last name
+    const nameParts = fullName.split(/\s+/)
+    const firstName = nameParts[0] || fullName
+    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : null
+
+    let personId: string | null = null
+
+    // Check for existing person by email first
+    if (email) {
+      const { data: existingByEmail } = await supabase
+        .from('saif_people')
+        .select('id')
+        .eq('email', email)
+        .limit(1)
+        .single()
+
+      if (existingByEmail) {
+        personId = existingByEmail.id
+      }
+    }
+
+    // Check for existing person by LinkedIn URL
+    if (!personId && linkedin) {
+      const { data: existingByLinkedin } = await supabase
+        .from('saif_people')
+        .select('id')
+        .eq('linkedin_url', linkedin)
+        .limit(1)
+        .single()
+
+      if (existingByLinkedin) {
+        personId = existingByLinkedin.id
+      }
+    }
+
+    // Create new person if not found
+    if (!personId) {
+      const { data: newPerson, error: personError } = await supabase
+        .from('saif_people')
+        .insert({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          linkedin_url: linkedin,
+          role: 'founder',
+          status: 'tracked',
+        })
+        .select('id')
+        .single()
+
+      if (personError) {
+        console.error(`Error creating person ${fullName}:`, personError)
+        continue
+      }
+      personId = newPerson.id
+    }
+
+    // Check if this person is already linked to this company
+    const { data: existingLink } = await supabase
+      .from('saif_company_people')
+      .select('id')
+      .eq('company_id', companyId)
+      .eq('user_id', personId)
+      .limit(1)
+      .single()
+
+    if (existingLink) {
+      console.log(`Person ${fullName} already linked to company ${companyId}`)
+      continue
+    }
+
+    // Link person to company
+    const { error: linkError } = await supabase
+      .from('saif_company_people')
+      .insert({
+        company_id: companyId,
+        user_id: personId,
+        relationship_type: 'founder',
+        is_primary_contact: i === 0,
+      })
+
+    if (linkError) {
+      console.error(`Error linking ${fullName} to company:`, linkError)
+    } else {
+      console.log(`Linked founder ${fullName} to company ${companyId}`)
+    }
+  }
+}
+
 async function findOrCreateCompany(
   companyName: string,
   website: string | null,
@@ -207,6 +310,21 @@ export async function submitFundingRequest(
       return {
         success: false,
         message: 'There was an error submitting your application. Please try again.',
+      }
+    }
+
+    // Create founder people records and link them to the company
+    if (companyId && data.founderNames) {
+      try {
+        await createFoundersForCompany(
+          companyId,
+          data.founderNames,
+          data.founderLinkedins,
+          data.primaryEmail
+        )
+      } catch (err) {
+        console.error('Failed to create founder records:', err)
+        // Don't fail the submission if founder creation fails
       }
     }
 
